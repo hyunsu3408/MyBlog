@@ -17,7 +17,12 @@ app.set("views","./views")
 app.use(express.static("public"))
 
 app.use("/",require("./routes/main"))
+app.use("/",require("./routes/admin"))
 
 app.listen(port,()=>{
     console.log(`APP listening on port ${port}`)
 })
+
+// git에서 .env파일 없애기
+// git rm --cacahed .env -> .env -> git commit -m ""
+// -> git push origin main
