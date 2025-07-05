@@ -27,9 +27,12 @@
                 </ul>
             </nav>
 
+
             <!--관리자 로그아웃-->
             <div class="header-button">
-                <a href="/logout">관리자 로그아웃</a>
+                <% if (isLoggedIn) { %>
+                <a href="/logout"><%= username %> 로그아웃</a>
+                <% } %>
             </div>
         </header>
 

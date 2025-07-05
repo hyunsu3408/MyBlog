@@ -4,8 +4,9 @@ const expressLayouts = require("express-ejs-layouts")
 const connectDb = require("./config/db.js");
 const cookieParser = require("cookie-parser");
 const methodOverride = require("method-override")
+const jwt = require("jsonwebtoken");
 
-
+const jwtToken = process.env.JWT_TOKEN;
 const app = express();
 const port = process.env.PORT || 8800;
 
@@ -13,6 +14,25 @@ const port = process.env.PORT || 8800;
 connectDb();
 
 app.use(cookieParser());
+app.use((req, res, next) => {
+    const token = req.cookies.token;
+
+    if (token) {
+        try {
+        const decoded = jwt.verify(token, jwtToken);
+        res.locals.isLoggedIn = true;
+        res.locals.userId = decoded.id;
+        res.locals.username = decoded.username; 
+    } catch (err) {
+        res.locals.isLoggedIn = false;
+        }
+    } else {
+        res.locals.isLoggedIn = false;
+    }
+
+    next();
+});
+
 app.use(expressLayouts)
 app.use(methodOverride("_method"))
 

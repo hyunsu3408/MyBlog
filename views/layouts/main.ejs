@@ -29,14 +29,19 @@
 
             <!--관리자 로그인-->
             <div class="header-button">
-                <a href="/admin">관리자 로그인</a>
+                <% if (isLoggedIn) { %>
+                    <a href="/logout">로그아웃</a>
+                    <a href="/allPosts">관리자 게시물</a>
+                <% } else { %>
+                    <a href="/admin">관리자 로그인</a>
+                <% } %>
             </div>
         </header>
 
-            <!--메인 : 실제로 내용이 들어갈 부분-->
-            <main class="main">
-                <%- body %>
-            </main>
+        <!--메인 : 실제로 내용이 들어갈 부분-->
+        <main class="main">
+            <%- body %>
+        </main>
     </div>
 
 </body>
