@@ -1,3 +1,4 @@
+// 1. 기본 설정
 require("dotenv").config();
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts")
@@ -10,10 +11,18 @@ const jwtToken = process.env.JWT_TOKEN;
 const app = express();
 const port = process.env.PORT || 8800;
 
-//DB 연결
+// 2.DB 연결
 connectDb();
 
+// 3. 미들웨어
 app.use(cookieParser());
+app.use(expressLayouts)
+app.use(methodOverride("_method"))
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(express.static("public"))
+
+// 4.로그인 상태 미들웨어
 app.use((req, res, next) => {
     const token = req.cookies.token;
 
@@ -33,21 +42,15 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(expressLayouts)
-app.use(methodOverride("_method"))
-
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-
+// 5.뷰 설정
 app.set("view engine","ejs")
 app.set("views","./views")
 
-app.use(express.static("public"))
-
+// 6.라우터
 app.use("/",require("./routes/main"))
 app.use("/",require("./routes/admin"))
 
-
+// 7. 서버 실행
 app.listen(port,()=>{
     console.log(`APP listening on port ${port}`)
 })

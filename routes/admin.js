@@ -1,3 +1,5 @@
+// 관리자 라우터
+
 const express = require("express")
 const router = express.Router();
 const adminLayout = "../views/layouts/admin";
@@ -14,6 +16,7 @@ const jwtToken = process.env.JWT_Token;
 
 /**
  * Check Login
+ * 로그인 체크하기
  */
 const checkLogin = (req,res,next)=>{
     const token = req.cookies.token;
@@ -36,6 +39,7 @@ const checkLogin = (req,res,next)=>{
 // Admin Page
 // Get /admin
 // */
+
 router.get("/admin",(req,res)=>{
     const locals={
         title:"관리자 페이지",
