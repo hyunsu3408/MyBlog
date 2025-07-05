@@ -3,7 +3,7 @@ const express = require("express");
 const expressLayouts = require("express-ejs-layouts")
 const connectDb = require("./config/db.js");
 const cookieParser = require("cookie-parser");
-
+const methodOverride = require("method-override")
 
 
 const app = express();
@@ -14,6 +14,7 @@ connectDb();
 
 app.use(cookieParser());
 app.use(expressLayouts)
+app.use(methodOverride("_method"))
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -25,6 +26,7 @@ app.use(express.static("public"))
 
 app.use("/",require("./routes/main"))
 app.use("/",require("./routes/admin"))
+
 
 app.listen(port,()=>{
     console.log(`APP listening on port ${port}`)

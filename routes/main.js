@@ -26,12 +26,12 @@ router.get("/about",(req,res)=>{
  * GET /post/:id 
  */
 
-router.get(
-    "/post/:id",
-    asyncHandler(async(req,res)=>{
-        const data = await Post.findOne({ _id: req.params.id});
-        res.render("post.ejs",{data,layout:mainLayout})
-    }))
+// router.get(
+//     "/post/:id",
+//     asyncHandler(async(req,res)=>{
+//         const data = await Post.findOne({ _id: req.params.id});
+//         res.render("post.ejs",{data,layout:mainLayout})
+//     }))
 
 
 module.exports = router;
