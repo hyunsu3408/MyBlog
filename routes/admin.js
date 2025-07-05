@@ -4,11 +4,11 @@ const adminLayout = "../views/layouts/admin";
 const adminLayout2 = "../views/layouts/admin-nologout";
 const asyncHandler = require("express-async-handler");
 const User = require("../models/user");
+const Post = require("../models/Post");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const jwtToken = process.env.JWT_Token;
-
 
 //로그인을 위해 cookie-parser,json-web-token 모듈 설치
 
@@ -68,6 +68,30 @@ router.post("/admin",asyncHandler(async(req,res)=>{
 
     }
 ));
+
+router.get(
+    "/allPosts",
+    asyncHandler(async(req,res)=>{
+        const locals={
+            title:"Posts"
+        }
+    
+        const data = await Post.find();
+        res.render("admin/allPosts",{locals,data,layout:adminLayout});
+    })
+);
+
+/**
+ *  Admin Logout
+ *  Get /logout
+ */
+router.get(
+    "/logout",
+    (req,res)=>{
+        res.clearCookie("token");
+        res.redirect("/");
+    }
+)
 
 
 module.exports = router;
