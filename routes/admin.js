@@ -109,11 +109,12 @@ router.get(
     "/allPosts",
     checkLogin,
     asyncHandler(async(req,res)=>{
-        const locals={
-            title:"Posts"
-        }
 
-        const data = await Post.find();
+        const data = await Post.find().sort({ createdAt: -1 });
+        const locals={
+            title:"Posts",
+            count: data.length
+        }
         res.render("admin/allPosts",{locals,data,layout:adminLayout});
     })
 );
