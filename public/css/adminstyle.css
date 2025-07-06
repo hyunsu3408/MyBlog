@@ -228,16 +228,22 @@ body {
     background-color: #bbb;
 }
 
-.edit-form {
-    display: flex;
+.add-form {
     flex-direction: column;
     gap: 16px;
-    max-width: 600px;
-    margin: 30px auto;
-    background: white;
-    padding: 32px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    padding: 5px;
+}
+
+.add-form label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.edit-form {
+    flex-direction: column;
+    gap: 16px;
+    padding: 5px;
 }
 
 .edit-form label {
@@ -255,6 +261,10 @@ body {
     border-radius: 6px;
     font-size: 1rem;
     box-sizing: border-box;
+}
+
+.form-input{
+    margin-bottom: 20px;
 }
 
 .form-textarea {
