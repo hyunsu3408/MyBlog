@@ -140,3 +140,148 @@ body {
 .btn:hover {
     background-color: #111;
 }
+
+.admin-posts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.admin-post-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.admin-post-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.admin-post-controls .btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #eee;
+    color:black;
+}
+
+.btn:hover {
+    background-color: #ccc;
+}
+
+.btn-delete {
+    background-color: #ccc;
+    color: black;
+}
+.btn-delete:hover {
+    background-color: #ab4f33;
+}
+.btn-edit:hover {
+    background-color: #508fce;
+}
+
+.admin-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 0 6px;
+}
+
+.post-button {
+    padding: 8px 14px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.post-button:hover {
+    background-color: #388e3c;
+}
+
+
+.back {
+    display: inline-block;
+    padding: 8px 14px;
+    margin: 5px;
+    background-color: #669bb7;
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    font-size: 0.95rem;
+}
+
+.back:hover {
+    background-color: #bbb;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 600px;
+    margin: 30px auto;
+    background: white;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.edit-form label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.btn-submit {
+    align-self: flex-end;
+    padding: 10px 20px;
+    background-color: #baf4a2;
+    color: black;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-submit:hover {
+    background-color: #43a047;
+}
+
+.edit-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 0 6px;
+}
