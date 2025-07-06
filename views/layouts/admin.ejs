@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= locals.title %></title>
     <meta name="description" content="MY First application using Node.js Express and MongoDB">
+    <link rel="stylesheet" href="/css/adminstyle.css">
 </head>
 <body>
     
@@ -31,7 +32,7 @@
             <!--관리자 로그아웃-->
             <div class="header-button">
                 <% if (isLoggedIn) { %>
-                <a href="/logout"><%= username %> 로그아웃</a>
+                <a href="/logout" class="btn"><%= username %> 로그아웃</a>
                 <% } %>
             </div>
         </header>

@@ -1,0 +1,147 @@
+/* 전체 폰트와 레이아웃 기본 세팅 */
+/* 기본 홈 배경 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.container {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 헤더 스타일 */
+.header {
+    background-color: #f0f0f5;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ddd;
+}
+
+.header-loop {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+.header-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.header-nav a {
+    text-decoration: none;
+    color: #666;
+    font-weight: 500;
+}
+
+.header-nav a:hover {
+    color: #111;
+    border-bottom: 2px solid #888;
+}
+
+.header-button a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #ff7f00;
+}
+
+/* 히어로 영역 */
+.top {
+    text-align: center;
+    margin: 50px 0 20px;
+}
+
+.top-heading {
+    font-size: 2.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.top-body {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.hero-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 게시물 영역 */
+.articles {
+    margin-top: 50px;
+}
+
+.articles-heading {
+    font-size: 1.5rem;
+    border-bottom: 2px solid #333;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+.article-ul {
+    list-style: none;
+    padding: 0;
+}
+
+.article-ul li {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.article-ul li:hover {
+    background-color: #f3f3f3;
+}
+
+.article-ul a {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+}
+
+.article-list-date {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #ddd;
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #111;
+}
+
+.btn-login {
+    margin-left: 10px;
+}
+
