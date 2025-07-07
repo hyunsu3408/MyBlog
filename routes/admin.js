@@ -54,7 +54,12 @@ router.get("/admin",(req,res)=>{
 router.get(
     "/post/:id",
     asyncHandler(async(req,res)=>{
-        const data = await Post.findOne({ _id: req.params.id});
+        const data = await Post.findByIdAndUpdate(
+            req.params.id,
+            { $inc : { views : 1}},
+            { new : true}
+        );
+
         const locals={
             title : data.title
         }

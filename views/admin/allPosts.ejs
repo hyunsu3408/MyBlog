@@ -13,6 +13,9 @@
         <li class="admin-post-item">
             <div>
                 <a href="/post/<%= post._id %>"><%= post.title %></a>
+                <small class="post-date">
+                    - <%= new Date(post.createdAt).toLocaleString('ko-KR') %>
+                </small>
             </div>
             <div class="admin-post-controls">
                 <a href="/edit/<%= post._id %>" class="btn btn-edit">편집</a>
