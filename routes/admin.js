@@ -11,6 +11,8 @@ const bcrypt = require("bcrypt");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const jwtToken = process.env.JWT_Token;
+const cookieParser = require('cookie-parser');
+
 
 //로그인을 위해 cookie-parser,json-web-token 모듈 설치
 
@@ -225,6 +227,68 @@ router
         res.redirect("/allPosts")
     })
 )
+
+// 좋아요 기능
+router
+.post("/like/:id", asyncHandler(async(req,res)=>{
+
+    const postId = req.params.id.toString();
+    const post = await Post.findById(postId);
+
+    let likedPosts = req.cookies.likedPosts ? JSON.parse(req.cookies.likedPosts) : [];
+
+    if(likedPosts.includes(postId)){
+        //좋아요 취소
+        if(post.likes>0){
+            await Post.findByIdAndUpdate(postId,{ $inc : {likes: -1} });
+        }
+        likedPosts = likedPosts.filter(id=>id !== postId);
+    }else{
+        //좋아요 추가
+        await Post.findByIdAndUpdate(postId, { $inc : {likes : 1} });
+        likedPosts.push(postId);
+    }
+
+    res.cookie("likedPosts",JSON.stringify(likedPosts),{
+        maxAge:360000,
+        httpOnly:true
+    })
+
+    res.redirect('/post/'+ req.params.id);
+    })
+);
+
+router.post("/dislike/:id",
+    asyncHandler(async(req,res)=>{
+    
+    const postId = req.params.id.toString();
+    const post = await Post.findById(postId);
+
+    let dislikedPosts = req.cookies.dislikedPosts ? JSON.parse(req.cookies.dislikedPosts) : [];
+
+    if(dislikedPosts.includes(postId)){
+        //싫어요 취소
+        if(post.dislikes>0){
+            await Post.findByIdAndUpdate(postId,{ $inc : {dislikes: -1} });
+        }
+        dislikedPosts = dislikedPosts.filter(id=>id !== postId);
+    }else{
+        //싫어요 추가
+        await Post.findByIdAndUpdate(postId, { $inc : {dislikes : 1} });
+        dislikedPosts.push(postId);
+    }
+
+    res.cookie("dislikedPosts",JSON.stringify(dislikedPosts),{
+        maxAge:360000,
+        httpOnly:true
+    })
+
+    res.redirect('/post/'+ req.params.id);
+
+    })
+)
+
+
 
 
 

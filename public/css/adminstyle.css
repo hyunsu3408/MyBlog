@@ -177,7 +177,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .post-header h1 {
@@ -194,6 +194,23 @@ body {
     color: #888;
     font-size: 0.85rem;
     margin-left: 8px;
+}
+
+.post-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-top: 8px;
+}
+
+
+.article{
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    line-height: 1.6;
 }
 
 
@@ -369,4 +386,21 @@ body {
     background-color: #4CAF50;
     color: white;
     font-weight: bold;
+}
+
+/* 좋아요/싫어요 아이콘 */
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.icon-img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
 }

@@ -14,7 +14,14 @@ const PostSchema= new mongoose.Schema({
         type:Date,
         default:Date.now()
     },
-    
+    likes:{
+        type:Number,
+        default:0
+    },
+    dislikes:{
+        type:Number,
+        default:0
+    },
     views:{
         type:Number,
         default:0 // 조회수 초기값
