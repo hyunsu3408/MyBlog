@@ -41,7 +41,7 @@ router.delete('/comments/:id/:postId',
         if(!comment ||
             !res.locals.isLoggedIn ||
             String(comment.user) !== res.locals.userId){
-                return res.status(403).send("권한이 없습니다.");
+                return res.redirect("/post/"+postId + "?error=권한이 없습니다");
             }
             
         console.log("Delete 요청 수신됨",req.params.id);

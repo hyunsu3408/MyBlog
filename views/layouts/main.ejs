@@ -32,9 +32,10 @@
             <div class="header-button">
                 <% if (isLoggedIn) { %>
                     <a href="/logout" class="btn">로그아웃</a>
-                    <a href="/allPosts" class="btn">관리자 게시물</a>
+                    <a href="/allPosts" class="btn">게시물</a>
                 <% } else { %>
                     <a href="/admin" class="btn btn-login">관리자 로그인</a>
+                    <a href="/logoutposts" class="btn btn-posts">게시물</a>
                 <% } %>
             </div>
         </header>

@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= locals.title %></title>
+    <title><%- locals.title %></title>
     <meta name="description" content="MY First application using Node.js Express and MongoDB">
     <link rel="stylesheet" href="/css/adminstyle.css">
+
 </head>
 <body>
     
@@ -14,11 +15,8 @@
         <!-- 헤더:로고, 상단메뉴,로그인 -->
         <header class="header">
             <!--로고-->
-            <% if (isLoggedIn) { %>
-            <a href="/allPosts" class="header-loop">게시물 페이지</a>
-            <% }else{ %>
-            <a href="/logoutposts" class="header-loop">게시물 페이지</a>
-            <% }%>
+            <a href="/" class="header-loop">Admin Page</a>
+
             <!--상단 메뉴-->
             <nav class="header-nav">
                 <ul>
@@ -30,16 +28,7 @@
                     </li>
                 </ul>
             </nav>
-
-
-            <!--관리자 로그아웃-->
-            <div class="header-button">
-                <% if (isLoggedIn) { %>
-                <a href="/logout" class="btn admin-btn"><%= username %> 로그아웃</a>
-                <% }else{ %>
-                <a href="/admin" class="btn admin-btn">관리자 로그인</a>
-                <% }%>
-            </div>
+            
         </header>
 
             <!--메인 : 실제로 내용이 들어갈 부분-->

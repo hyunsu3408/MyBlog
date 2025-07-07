@@ -1,0 +1,31 @@
+<div class="admin-title">
+    <h2><%= locals.title %><span class="count"> (<%= locals.count %>개)</span></h2>
+</div>
+
+<form action="/logoutposts" method="GET" class="search-form">
+    <input type="text" name="keyword" id="keyword" placeholder="제목 또는 검색" value="<%= locals.keyword || '' %>">
+    <input type="submit" value="검색"></button>
+</form>
+
+<ul class="admin-posts">
+    <% data.forEach(post => { %>
+        <li class="admin-post-item">
+            <div>
+                <a href="/post/<%= post._id %>"><%= post.title %></a>
+                <small class="post-date">
+                    - <%= new Date(post.createdAt).toLocaleString('ko-KR') %>
+                </small>
+            </div>
+        </li>
+    <% }) %>
+</ul>
+
+<div class="pagination">
+    <% for(let i=1; i<= locals.totalPages; i++) { %>
+        <% if(i === locals.currentPage) { %>
+            <span class="page active"><%= i %></span>
+        <% } else { %>
+            <a href="/logoutposts?page=<%= i%><%= locals.keyword ? '&keyword=' + locals.keyword : '' %>" class="page"><%= i %></a>
+        <% } %>
+    <% } %>
+</div>

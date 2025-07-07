@@ -53,7 +53,7 @@ body {
 .header-button a {
     margin-left: 10px;
     text-decoration: none;
-    color: #ff7f00;
+    color:black;
 }
 
 /* 히어로 영역 */
@@ -138,7 +138,7 @@ body {
 }
 
 .btn:hover {
-    background-color: #111;
+    background-color: #49985f;
 }
 
 .btn-login {

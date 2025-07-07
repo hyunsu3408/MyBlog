@@ -4,6 +4,7 @@ const express = require("express")
 const router = express.Router();
 const adminLayout = "../views/layouts/admin";
 const adminLayout2 = "../views/layouts/admin-nologout";
+const adminlogin = "../views/layouts/admin-login"
 const asyncHandler = require("express-async-handler");
 const Comment = require("../models/Comment")
 const User = require("../models/user");
@@ -50,7 +51,7 @@ router.get("/admin",(req,res)=>{
         title:"관리자 페이지",
     };
 
-    res.render("admin/index",{locals,layout:adminLayout2});
+    res.render("admin/index",{locals,layout:adminlogin});
 })
 
 // 게시물 한개 불러오기
@@ -68,7 +69,9 @@ router.get(
         const locals={
             title : data.title
         }
-        res.render("post.ejs",{locals,data,comments,layout:adminLayout})
+        res.render("post.ejs",{locals,data,comments
+            ,error: req.query.error || null
+            ,layout:adminLayout})
     }))
 
 /**
@@ -139,7 +142,7 @@ router.get(
 
         const locals={
             title:"Posts",
-            count: data.length,
+            count: totalCount,
             // 무슨 검색했는지 보기 위한 템플릿
             keyword,
             currentPage: page,

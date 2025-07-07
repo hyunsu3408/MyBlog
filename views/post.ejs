@@ -49,3 +49,8 @@
         <% }) %>
     </ul>
 </section>
+<% if (typeof error !== 'undefined' && error) { %>
+<script>
+    alert("<%= error %>")
+</script>
+<% } %>
