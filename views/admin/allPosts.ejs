@@ -3,6 +3,11 @@
     <a href="/add" class="post-button">+ 새 게시물</a>
 </div>
 
+<form action="/allPosts" method="GET" class="search-form">
+    <input type="text" name="keyword" id="keyword" placeholder="제목 또는 검색" value="<%= locals.keyword || '' %>">
+    <input type="submit" value="검색"></button>
+</form>
+
 <ul class="admin-posts">
     <% data.forEach(post => { %>
         <li class="admin-post-item">
@@ -18,3 +23,13 @@
         </li>
     <% }) %>
 </ul>
+
+<div class="pagination">
+    <% for(let i=1; i<= locals.totalPages; i++) { %>
+        <% if(i === locals.currentPage) { %>
+            <span class="page active"><%= i %></span>
+        <% } else { %>
+            <a href="/allPosts?page=<%= i%><%= locals.keyword ? '&keyword=' + locals.keyword : '' %>" class="page"><%= i %></a>
+        <% } %>
+    <% } %>
+</div>

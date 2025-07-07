@@ -33,6 +33,8 @@ app.use((req, res, next) => {
         res.locals.userId = decoded.id;
         res.locals.username = decoded.username; 
     } catch (err) {
+        console.log("JWT 만료 또는 위조:",err.message);
+        res.clearCookie("token"); //만료된 쿠키 삭제
         res.locals.isLoggedIn = false;
         }
     } else {

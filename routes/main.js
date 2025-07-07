@@ -6,10 +6,11 @@ const asyncHandler = require("express-async-handler")
 
 // /와 /home 들어왔을 때 index.ejs를 보여줌
 router.get(["/","/home"],asyncHandler(async(req,res)=>{
-    const locals={
-        title:"Home"
-    }
     const data = await Post.find();
+    const locals={
+        title:"Home",
+        count: data.length
+    }
     res.render("index.ejs",{locals:locals,data,layout:mainLayout})
 })
 );

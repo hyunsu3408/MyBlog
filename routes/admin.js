@@ -19,14 +19,16 @@ const jwtToken = process.env.JWT_Token;
  * 로그인 체크하기
  */
 const checkLogin = (req,res,next)=>{
+    
     const token = req.cookies.token;
+
     if(!token){
         res.redirect("/admin")
     }
     else{
         try{
             const decoded = jwt.verify(token,jwtToken);
-            req.userId = decoded.userId;
+            req.userId = decoded.id;
             // 관리자라면 next();
             next();
         }catch(err){
@@ -110,11 +112,30 @@ router.get(
     checkLogin,
     asyncHandler(async(req,res)=>{
 
-        const data = await Post.find().sort({ createdAt: -1 });
+        const keyword = req.query.keyword || "";
+        const page = parseInt(req.query.page) || 1; //현재 페이지
+        const perPage = 10; // 한 페이지당 게시물 수
+
+        const search = keyword ? {$or:[
+            {title : { $regex:keyword , $options: "i"}},
+            {body : { $regex:keyword, $options: "i"}}
+        ]}:{};
+        const data = await Post.find(search)
+            .sort({ createdAt: -1 })
+            .skip((page-1)* perPage)
+            .limit(perPage);
+        
+        const totalCount = await Post.countDocuments(search); // 총 게시물 수
+
         const locals={
             title:"Posts",
-            count: data.length
-        }
+            count: data.length,
+            // 무슨 검색했는지 보기 위한 템플릿
+            keyword,
+            currentPage: page,
+            totalPages: Math.ceil(totalCount/ perPage)
+        };
+
         res.render("admin/allPosts",{locals,data,layout:adminLayout});
     })
 );

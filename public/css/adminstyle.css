@@ -113,7 +113,7 @@ body {
 .btn{
     margin: 5px;;
     padding: 5px;
-    color: white;
+    color: black;
     font-size: 0.9rem;
     font-weight: bold;
     background-color: #4CAF50;
@@ -129,7 +129,7 @@ body {
     border: none;
     border-radius: 6px;
     background-color: #ddd;
-    color: white;
+    color: #333;
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: bold;
@@ -138,7 +138,7 @@ body {
 }
 
 .btn:hover {
-    background-color: #111;
+    background-color: #388e3c;
 }
 
 .admin-posts {
@@ -169,12 +169,12 @@ body {
     border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
-    background-color: #eee;
+    background-color: #a19e9e;
     color:black;
 }
 
 .btn:hover {
-    background-color: #ccc;
+    background-color: #388e3c;
 }
 
 .btn-delete {
@@ -299,4 +299,50 @@ body {
 .count {
     color: #669bb7;
     font-weight: normal;
+}
+
+/* 게시물 검색 css */
+.search-form {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+}
+
+.search-form input[type="text"] {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-right: 8px;
+}
+
+.search-form button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
+/* 게시물 페이지 수*/
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.page {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+}
+
+.page.active {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
 }

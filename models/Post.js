@@ -13,6 +13,10 @@ const PostSchema= new mongoose.Schema({
     createdAt:{
         type:Date,
         default:Date.now()
+    },
+    views:{
+        type:Number,
+        default:0 // 조회수 초기값
     }
 })
 
