@@ -15,11 +15,11 @@ const port = process.env.PORT || 8800;
 connectDb();
 
 // 3. 미들웨어
+app.use(express.urlencoded({extended:true}));
+app.use(methodOverride("_method"))
 app.use(cookieParser());
 app.use(expressLayouts)
-app.use(methodOverride("_method"))
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
 app.use(express.static("public"))
 
 // 4.로그인 상태 미들웨어
@@ -44,6 +44,13 @@ app.use((req, res, next) => {
     next();
 });
 
+// method-override 작동 확인 로그
+app.use((req, res, next) => {
+    console.log(`[${req.method}] ${req.originalUrl}`);
+    next();
+});
+
+
 // 5.뷰 설정
 app.set("view engine","ejs")
 app.set("views","./views")
@@ -51,6 +58,7 @@ app.set("views","./views")
 // 6.라우터
 app.use("/",require("./routes/main"))
 app.use("/",require("./routes/admin"))
+app.use("/",require("./routes/comment"))
 
 // 7. 서버 실행
 app.listen(port,()=>{

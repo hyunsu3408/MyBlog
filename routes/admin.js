@@ -5,6 +5,7 @@ const router = express.Router();
 const adminLayout = "../views/layouts/admin";
 const adminLayout2 = "../views/layouts/admin-nologout";
 const asyncHandler = require("express-async-handler");
+const Comment = require("../models/Comment")
 const User = require("../models/user");
 const Post = require("../models/Post");
 const bcrypt = require("bcrypt");
@@ -56,6 +57,8 @@ router.get("/admin",(req,res)=>{
 router.get(
     "/post/:id",
     asyncHandler(async(req,res)=>{
+        const comments = await Comment.find({postId: req.params.id});
+
         const data = await Post.findByIdAndUpdate(
             req.params.id,
             { $inc : { views : 1}},
@@ -65,7 +68,7 @@ router.get(
         const locals={
             title : data.title
         }
-        res.render("post.ejs",{locals,data,layout:adminLayout})
+        res.render("post.ejs",{locals,data,comments,layout:adminLayout})
     }))
 
 /**
@@ -235,6 +238,7 @@ router
     const postId = req.params.id.toString();
     const post = await Post.findById(postId);
 
+    // 사용자가 좋아요를 누른 게시물 ID 목록
     let likedPosts = req.cookies.likedPosts ? JSON.parse(req.cookies.likedPosts) : [];
 
     if(likedPosts.includes(postId)){
@@ -242,6 +246,7 @@ router
         if(post.likes>0){
             await Post.findByIdAndUpdate(postId,{ $inc : {likes: -1} });
         }
+        //쿠키 배열에서 postId를 제거
         likedPosts = likedPosts.filter(id=>id !== postId);
     }else{
         //좋아요 추가
@@ -250,7 +255,7 @@ router
     }
 
     res.cookie("likedPosts",JSON.stringify(likedPosts),{
-        maxAge:360000,
+        maxAge:3600000, // 유효시간 60분
         httpOnly:true
     })
 
@@ -279,7 +284,7 @@ router.post("/dislike/:id",
     }
 
     res.cookie("dislikedPosts",JSON.stringify(dislikedPosts),{
-        maxAge:360000,
+        maxAge:3600000, // 유효시간 60분
         httpOnly:true
     })
 
