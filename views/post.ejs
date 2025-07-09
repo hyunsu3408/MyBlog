@@ -48,7 +48,7 @@
                     <!--삭제 버튼-->
                     <form action="/comments/<%= comment._id %>?_method=DELETE" method="POST" style="display:inline;">
                         <input type="hidden" name="postId" value="<%= data._id %>">
-                        <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?')" class="comment-btn">삭제</button>
+                        <button type="submit" onclick="return confirm('삭제하시겠습니까?')" class="comment-btn">삭제</button>
                     </form>
                 </div>
                     <!-- 숨겨진 수정 폼-->
@@ -61,6 +61,7 @@
             <% }) %>
         </ul>
     </section>
+    
 <% if (typeof error !== 'undefined' && error) { %>
 <script>
     alert("<%= error %>")

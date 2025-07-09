@@ -5,6 +5,7 @@ const Post = require("../models/Post")
 const asyncHandler = require("express-async-handler")
 const adminLayout2 = "../views/layouts/admin-nologout";
 
+
 // /와 /home 들어왔을 때 index.ejs를 보여줌
 router.get(["/","/home"],asyncHandler(async(req,res)=>{
     const data = await Post.find().sort({ createdAt: -1 });

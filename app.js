@@ -11,6 +11,8 @@ const jwtToken = process.env.JWT_TOKEN;
 const app = express();
 const port = process.env.PORT || 8800;
 
+const Visitor = require("./models/Visitor.js")
+
 // 2.DB 연결
 connectDb();
 
@@ -23,8 +25,9 @@ app.use(express.json());
 app.use(express.static("public"))
 
 // 4.로그인 상태 미들웨어
-app.use((req, res, next) => {
+app.use(async(req, res, next) => {
     const token = req.cookies.token;
+    let visitor = await Visitor.findOne();
 
     if (token) {
         try {
@@ -41,7 +44,19 @@ app.use((req, res, next) => {
         res.locals.isLoggedIn = false;
     }
 
+    if(!visitor){
+        visitor = new Visitor({count:1});
+    } else{
+        visitor.count += 1;
+    }
+    await visitor.save();
+
+    res.locals.visitorCount = visitor.count;
     next();
+
+
+
+
 });
 
 // method-override 작동 확인 로그
