@@ -41,16 +41,39 @@
                 <div class="comment-date">
                     <small><%= new Date(comment.createdAt).toLocaleString('ko-KR') %></small>
                 </div>
-                <form action="/comments/<%= comment._id %>/<%= data._id %>?_method=DELETE" method="POST" style="display:inline;">
-                    <!--<input type="hidden" name="_method" value="DELETE">-->
-                    <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
-                </form>
-            </li>
-        <% }) %>
-    </ul>
-</section>
+                <div class="comment-buttons">
+                    <!--수정 버튼-->
+                    <button type="button" onclick="toggleEditForm('<%= comment._id %>')" class="comment-btn" class="comment-btn">수정</button>
+                    
+                    <!--삭제 버튼-->
+                    <form action="/comments/<%= comment._id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <input type="hidden" name="postId" value="<%= data._id %>">
+                        <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?')" class="comment-btn">삭제</button>
+                    </form>
+                </div>
+                    <!-- 숨겨진 수정 폼-->
+                    <form id="edit-form-<%= comment._id %>" action="/comments/<%= comment._id %>?_method=PUT" method="POST" style="display:none; margin-top: 8px;" class="edit-comment-form">
+                        <input type="hidden" name="postId" value="<%= data._id %>">
+                        <textarea name="text" required><%= comment.text %></textarea>
+                        <button type="submit" onclick="return confirm('수정하시겠습니까?')" class="comment-btn">수정 완료</button>
+                    </form>
+                </li>
+            <% }) %>
+        </ul>
+    </section>
 <% if (typeof error !== 'undefined' && error) { %>
 <script>
     alert("<%= error %>")
 </script>
 <% } %>
+
+<script>
+    function toggleEditForm(commentId) {
+        const form = document.getElementById('edit-form-'+commentId);
+        if(form.style.display === 'none'){
+            form.style.display = 'block';
+        }else{
+            form.style.display = 'none';
+        }
+    }
+</script>

@@ -30,10 +30,32 @@ router.post("/post/:id/comments",
     })
 )
 
-router.delete('/comments/:id/:postId',
+//댓글 수정
+router.put("/comments/:id",
+    asyncHandler(async(req,res)=>{
+
+        const postId = req.body.postId;
+        const commentId = req.params.id;
+
+        const comment = await Comment.findById(commentId);
+
+        if(!comment || !res.locals.isLoggedIn || String(comment.user) !== res.locals.userId){
+            return res.status(403).send('권한이 없습니다.')
+        }
+
+        comment.text = req.body.text;
+        await comment.save();
+
+        console.log("PUT 요청 수신됨",req.params.id);
+        res.redirect("/post/"+ comment.postId)
+
+    })
+)
+
+router.delete('/comments/:id',
     asyncHandler(async(req,res)=>{
         
-        const postId = req.params.postId;
+        const postId = req.body.postId;
         const commentId = req.params.id;
         
         const comment = await Comment.findById(commentId);
@@ -41,12 +63,12 @@ router.delete('/comments/:id/:postId',
         if(!comment ||
             !res.locals.isLoggedIn ||
             String(comment.user) !== res.locals.userId){
-                return res.redirect("/post/"+postId + "?error=권한이 없습니다");
+                return res.redirect("/post/"+comment.postId + "?error=권한이 없습니다");
             }
             
         console.log("Delete 요청 수신됨",req.params.id);
         await Comment.findByIdAndDelete(commentId);
-        res.redirect("/post/" + postId);
+        res.redirect("/post/" + comment.postId);
 
     })
 )

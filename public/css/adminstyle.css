@@ -435,11 +435,13 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap:8px;
     background: #fff;
     padding: 10px 14px;
     border-radius: 6px;
     margin-bottom: 8px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    flex-wrap: wrap;
 }
 
 .comment-content {
@@ -453,6 +455,41 @@ body {
     margin-left: 20px;
 }
 
+.comment-btn {
+    justify-content: right;
+    padding: 6px 12px;
+    background-color: #a8c5ff;  /* 연한 파란색 */
+    color: #333;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
 
+.comment-btn:hover {
+    background-color: #508fce;  /* 진한 파란색 */
+    color: white;
+}
 
+.comment-buttons{
+    display: flex;
+    gap:8px;
+    margin-left: auto;
+}
 
+.edit-comment-form {
+    display: none;  /* 기본적으로 숨김 */
+    flex-direction: column;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.edit-comment-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    resize: vertical;
+}
