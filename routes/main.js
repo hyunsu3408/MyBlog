@@ -8,12 +8,75 @@ const adminLayout2 = "../views/layouts/admin-nologout";
 
 // /와 /home 들어왔을 때 index.ejs를 보여줌
 router.get(["/","/home"],asyncHandler(async(req,res)=>{
-    const data = await Post.find().sort({ createdAt: -1 });
+
+    const sort = req.query.sort || "recent";
+    const keyword = req.query.keyword || "";
+    const page = parseInt(req.query.page) || 1;
+    const limit = 10;
+    const skip = (page - 1) * limit;
+
+    const search = keyword ? {
+        $or:[
+            {title : { $regex:keyword , $options: "i"}},
+            {body : { $regex:keyword, $options: "i"}}
+        ]} : {};
+
+    const counted = await Post.aggregate([
+        { $match : search },
+        { $count : "total"}
+    ])
+
+    const totalCount = counted[0]?.total || 0;
+
+    let sortOption = {createdAt: -1}; //기본 최신순
+    if(sort === "likes"){
+        sortOption = {likes : -1};
+    }else if(sort === "comments"){
+        sortOption = { commentCount: -1 };
+    }else if(sort === "views"){
+        sortOption = { views : -1}
+    }
+
+    const data = await Post.aggregate([
+        {
+            $match : search
+        }
+        ,
+        {
+            $lookup:{
+                from: "comments", // collection 이름
+                localField: "_id",
+                foreignField: "postId",
+                as: "comments"
+            }
+        },
+        {
+            $addFields:{
+                commentCount: { $size: "$comments"}
+            }
+        },
+        {
+            $sort: sortOption
+        },
+        {
+            $skip: skip
+        },
+        {
+            $limit:10
+        }
+    ]);
+    
+    const postCount = await Post.countDocuments();
+    const count = keyword ? totalCount : postCount;
+
     const locals={
         title:"Home",
-        count: data.length
+        count: count,
+        currentPage: page,
+        totalPages: Math.ceil(totalCount/ limit)
     }
-    res.render("index.ejs",{locals:locals,data,layout:mainLayout})
+
+    res.render("index.ejs",{locals:locals,data,keyword,sort,layout:mainLayout})
 })
 );
 

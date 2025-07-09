@@ -11,6 +11,18 @@
     <!--최근 게시물-->
     <section class="articles">
         <h2 class="articles-heading">최근 게시물 (<%= locals.count %>개)</h2>
+        <!--검색 기능-->
+        <form action="/" method="GET" class="search-sort-form">
+            <input type="text" name="keyword" id="keyword" placeholder="제목 또는 검색" value="<%= keyword || '' %>">
+            <input type="submit" value="검색"></button>
+            <label for="sort">정렬:</label>
+            <select name="sort" id="sort" onchange="this.form.submit()">
+                <option value="recent" <%= sort === 'recent' ? 'selected' : '' %>>최신순</option>
+                <option value="likes" <%= sort === 'likes' ? 'selected' : '' %>>좋아요순</option>
+                <option value="comments" <%= sort === 'comments' ? 'selected' : '' %>>댓글순</option>
+                <option value="views" <%= sort === 'views' ? 'selected' : '' %>>조회수순</option>
+            </select>
+        </form>
         <ul class="article-ul">
             <% data.forEach( post => { %>
             <li>
@@ -22,3 +34,15 @@
             <% }) %>
         </ul>
     </section>
+
+    <div class="pagination">
+        <% for(let i=1; i<= locals.totalPages; i++) { %>
+            <% if(i === locals.currentPage) { %>
+                <span class="page active"><%= i %></span>
+            <% } else { %>
+                <a href="/?page=<%= i%>&sort=<%= sort %>&keyword=<%= keyword %>" class="page <%= i === locals.currentPage ? 'active' : '' %>">
+                    <%= i %>
+                </a>
+            <% } %>
+        <% } %>
+    </div>

@@ -174,3 +174,59 @@ body {
     padding: 2px 6px;
     border-radius: 12px;
 }
+
+.search-sort-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.search-sort-form input[type="text"] {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-sort-form input[type="submit"] {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.search-sort-form select {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.page {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+}
+
+.page.active {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
