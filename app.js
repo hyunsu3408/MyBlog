@@ -53,10 +53,6 @@ app.use(async(req, res, next) => {
 
     res.locals.visitorCount = visitor.count;
     next();
-
-
-
-
 });
 
 // method-override 작동 확인 로그
