@@ -15,6 +15,7 @@
         <form action="/" method="GET" class="search-sort-form">
             <input type="text" name="keyword" id="keyword" placeholder="제목 또는 검색" value="<%= keyword || '' %>">
             <input type="submit" value="검색"></button>
+            <!--기능별 정렬-->
             <label for="sort">정렬:</label>
             <select name="sort" id="sort" onchange="this.form.submit()">
                 <option value="recent" <%= sort === 'recent' ? 'selected' : '' %>>최신순</option>

@@ -2,12 +2,12 @@
     <h2><%= locals.title %><span class="count"> (<%= locals.count %>개)</span></h2>
     <a href="/add" class="post-button">+ 새 게시물</a>
 </div>
-
+<!--검색-->
 <form action="/allPosts" method="GET" class="search-form">
     <input type="text" name="keyword" id="keyword" placeholder="제목 또는 검색" value="<%= locals.keyword || '' %>">
     <input type="submit" value="검색"></button>
 </form>
-
+<!--전체 게시물-->
 <ul class="admin-posts">
     <% data.forEach(post => { %>
         <li class="admin-post-item">
@@ -26,7 +26,7 @@
         </li>
     <% }) %>
 </ul>
-
+<!--페이징-->
 <div class="pagination">
     <% for(let i=1; i<= locals.totalPages; i++) { %>
         <% if(i === locals.currentPage) { %>
