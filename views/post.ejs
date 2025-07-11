@@ -1,5 +1,6 @@
 <div class="post-header">
     <h1><%= data.title%></h1>
+    <!--조회수-->
     <p class="views">조회수 : <%= data.views %>회</p>
 </div>
 
@@ -8,13 +9,14 @@
 </article>
 
 <div class="post-actions">
+    <!--좋아요 버튼-->
     <form action="/like/<%= data._id %>" method="POST" style="display:inline;">
         <button type="submit" class="icon-button">
             <img src="/img/like.jpg" alt="좋아요" class="icon-img">
             (<%= data.likes %>)
         </button>
     </form>
-    
+    <!--싫어요 버튼-->
     <form action="/dislike/<%= data._id %>" method="POST" style="display:inline;">
         <button type="submit" class="icon-button">
             <img src="/img/dislikes.jpg" alt="싫어요" class="icon-img">
